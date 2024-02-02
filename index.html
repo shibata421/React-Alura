@@ -32,9 +32,37 @@
             )
         }
 
+        function PaginaDeLogin() {
+            return (
+                <div className='container-login'>
+                    <img src="./img/imagem-login.png" alt='uma mulher negra de cabelos crespos usando óculos e mexendo no computador'/>
+                    <section>
+                        <form>
+                            <Titulo/>
+                            <Subtitulo/>
+                            <div className='form__campo-digitacao'>
+                                <label for='email'>E-mail ou usuário</label>    
+                                <input type='email' 
+                                    placeholder='Digite o seu e-mail ou usuário'
+                                    required
+                                    id='email' />
+                            </div>
+                            <div className='form__campo-digitacao'>
+                                <label for='senha'>Senha</label>    
+                                <input type='password' 
+                                    placeholder='Digite a sua senha'
+                                    required
+                                    id='senha' />
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            )
+        }
+
         ReactDOM
             .createRoot(document.getElementById("root"))
-            .render(<Titulo/>)
+            .render(<PaginaDeLogin/>)
     </script>
 </body>
 
