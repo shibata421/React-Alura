@@ -20,40 +20,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js" integrity="sha512-OG8Ewzlpr7HnTHwrXzN256M6xbPdDJdurFYIRh0vRHOeFsL0S9yIwHiWSA2kopUevhG/ta4qyVVc2hCRSJy2MQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="text/babel">
-        function Titulo() {
+        function Titulo({ children }) {
             return (
-                <h1 className='form__titulo'>Login</h1>
+                <h1 className='form__titulo'>{ children }</h1>
             )
         }
         
-        function Subtitulo() {
+        function Subtitulo({ children }) {
             return (
-                <h2 className='form__texto'>Boas-vindas! Faça seu login.</h2>
+                <h2 className='form__texto'>{ children }</h2>
+            )
+        }
+
+        function CampoDeDigitacao({ label, tipo, placeholder, value, setValor }) {
+            return (
+                <div className='form__campo-digitacao'>
+                    <label for='campoDigitacao'>{ label }</label>    
+                    <input 
+                        type={ tipo } 
+                        placeholder={ placeholder }
+                        required
+                        id='campoDigitacaoemail' 
+                        value={ value }
+                        onChange={ (evento) => setValor(evento.target.value) }
+                    />
+                </div>
+            )
+        }
+
+        function Botao({ children }) {
+            return (
+                <button type='submit' className='form__botao'>{ children }</button>
             )
         }
 
         function PaginaDeLogin() {
+            const [email, setEmail] = React.useState('')
+            const [senha, setSenha] = React.useState('')
+
             return (
                 <div className='container-login'>
                     <img src="./img/imagem-login.png" alt='uma mulher negra de cabelos crespos usando óculos e mexendo no computador'/>
                     <section>
                         <form>
-                            <Titulo/>
-                            <Subtitulo/>
-                            <div className='form__campo-digitacao'>
-                                <label for='email'>E-mail ou usuário</label>    
-                                <input type='email' 
-                                    placeholder='Digite o seu e-mail ou usuário'
-                                    required
-                                    id='email' />
-                            </div>
-                            <div className='form__campo-digitacao'>
-                                <label for='senha'>Senha</label>    
-                                <input type='password' 
-                                    placeholder='Digite a sua senha'
-                                    required
-                                    id='senha' />
-                            </div>
+                            <Titulo>Login</Titulo>
+                            <Subtitulo>Boas-vindas! Faça seu login.</Subtitulo>
+                            <CampoDeDigitacao 
+                                label='Email ou usuário' 
+                                tipo='email' 
+                                placeholder='Digite o seu e-mail ou usuário'
+                                value={ email }
+                                setValor={ setEmail }
+                            />
+                            <CampoDeDigitacao 
+                                label='Senha' 
+                                tipo='password' 
+                                placeholder='Digite a sua senha'
+                                value={ senha }
+                                setValor={ setSenha }
+                            />
+                            <Botao>Login</Botao>
                         </form>
                     </section>
                 </div>
