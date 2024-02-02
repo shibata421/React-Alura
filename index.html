@@ -35,12 +35,12 @@
         function CampoDeDigitacao({ label, tipo, placeholder, value, setValor }) {
             return (
                 <div className='form__campo-digitacao'>
-                    <label for='campoDigitacao'>{ label }</label>    
+                    <label for={ tipo }>{ label }</label>    
                     <input 
                         type={ tipo } 
                         placeholder={ placeholder }
                         required
-                        id='campoDigitacaoemail' 
+                        id={ tipo } 
                         value={ value }
                         onChange={ (evento) => setValor(evento.target.value) }
                     />
@@ -50,7 +50,12 @@
 
         function Botao({ children }) {
             return (
-                <button type='submit' className='form__botao'>{ children }</button>
+                <button 
+                    type='submit' 
+                    className='form__botao'
+                >
+                    { children }
+                </button>
             )
         }
 
@@ -58,11 +63,17 @@
             const [email, setEmail] = React.useState('')
             const [senha, setSenha] = React.useState('')
 
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                console.log(email)
+                console.log(senha)
+            }
+
             return (
                 <div className='container-login'>
                     <img src="./img/imagem-login.png" alt='uma mulher negra de cabelos crespos usando óculos e mexendo no computador'/>
                     <section>
-                        <form>
+                        <form  onSubmit={ handleSubmit }>
                             <Titulo>Login</Titulo>
                             <Subtitulo>Boas-vindas! Faça seu login.</Subtitulo>
                             <CampoDeDigitacao 
@@ -79,7 +90,9 @@
                                 value={ senha }
                                 setValor={ setSenha }
                             />
-                            <Botao>Login</Botao>
+                            <Botao>
+                                Login
+                            </Botao>
                         </form>
                     </section>
                 </div>
